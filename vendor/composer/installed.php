@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'a9ea0f25373703cf93a152666fbfc9c4591c378d',
         'name' => 'codeigniter4/codeigniter4',
         'dev' => true,
     ),
     'versions' => array(
+        'agungsugiarto/codeigniter4-cors' => array(
+            'pretty_version' => 'v2.0.0',
+            'version' => '2.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../agungsugiarto/codeigniter4-cors',
+            'aliases' => array(),
+            'reference' => '3eae9932e8d68330a5b45a41a6871cc61a97bee3',
+            'dev_requirement' => false,
+        ),
         'codeigniter/coding-standard' => array(
             'pretty_version' => 'v1.2.0',
             'version' => '1.2.0.0',
@@ -20,12 +29,21 @@
             'dev_requirement' => true,
         ),
         'codeigniter4/codeigniter4' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'a9ea0f25373703cf93a152666fbfc9c4591c378d',
+            'dev_requirement' => false,
+        ),
+        'codeigniter4/framework' => array(
+            'pretty_version' => 'v4.1.9',
+            'version' => '4.1.9.0',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../codeigniter4/framework',
+            'aliases' => array(),
+            'reference' => '4ec623a6b8269dd09f570ab514e5864276bb7f56',
             'dev_requirement' => false,
         ),
         'composer/pcre' => array(

@@ -17,10 +17,10 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         '38143a9afc50997d55e4815db8489d1c' => __DIR__ . '/..' . '/rector/rector/bootstrap.php',
     );
 
@@ -84,6 +84,7 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         ),
         'F' => 
         array (
+            'Fluent\\Cors\\' => 12,
             'Faker\\' => 6,
         ),
         'D' => 
@@ -107,8 +108,8 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -238,6 +239,10 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
         ),
+        'Fluent\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/agungsugiarto/codeigniter4-cors/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
@@ -278,6 +283,7 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         array (
             0 => __DIR__ . '/../..' . '/system',
             1 => __DIR__ . '/../..' . '/tests/system',
+            2 => __DIR__ . '/..' . '/codeigniter4/framework/system',
         ),
     );
 
@@ -1185,6 +1191,10 @@ class ComposerStaticInit08a364b917a00b36d5e84764b2e637e5
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Fluent\\Cors\\Commands\\CorsCommand' => __DIR__ . '/..' . '/agungsugiarto/codeigniter4-cors/src/Commands/CorsCommand.php',
+        'Fluent\\Cors\\Config\\Cors' => __DIR__ . '/..' . '/agungsugiarto/codeigniter4-cors/src/Config/Cors.php',
+        'Fluent\\Cors\\Filters\\CorsFilter' => __DIR__ . '/..' . '/agungsugiarto/codeigniter4-cors/src/Filters/CorsFilter.php',
+        'Fluent\\Cors\\ServiceCors' => __DIR__ . '/..' . '/agungsugiarto/codeigniter4-cors/src/ServiceCors.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Kint\\CallFinder' => __DIR__ . '/..' . '/kint-php/kint/src/CallFinder.php',
         'Kint\\Kint' => __DIR__ . '/..' . '/kint-php/kint/src/Kint.php',
