@@ -1,0 +1,30 @@
+CRITICAL - 2022-04-19 22:17:21 --> Call to a member function findAll() on null
+#0 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(832): App\Controllers\Roles->index()
+#1 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Roles))
+#2 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\zowis-system-new\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-19 22:17:21 --> Call to a member function findAll() on null
+#0 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(832): App\Controllers\Roles->index()
+#1 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Roles))
+#2 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\zowis-system-new\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-19 22:22:54 --> Call to a member function findAll() on null
+#0 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(832): App\Controllers\Roles->index()
+#1 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Roles))
+#2 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\zowis-system-new\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-19 22:22:54 --> Call to a member function findAll() on null
+#0 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(832): App\Controllers\Roles->index()
+#1 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Roles))
+#2 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\zowis-system-new\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-19 22:33:40 --> Call to a member function findAll() on null
+#0 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(832): App\Controllers\Roles->index()
+#1 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Roles))
+#2 C:\xampp\htdocs\zowis-system-new\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\zowis-system-new\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

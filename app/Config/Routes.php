@@ -29,6 +29,10 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
+$routes->group('api', function($routes){
+    $routes->resource('roles'); //api/roles
+});
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
