@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    // public $baseURL = 'http://localhost/zowis-system-new';
+    // public $baseURL = 'http://localhost/zowis-system-new/';
     public $baseURL = 'https://ec2-18-117-137-48.us-east-2.compute.amazonaws.com/zowis-system-new/';
 
 
