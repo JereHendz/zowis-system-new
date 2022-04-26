@@ -30,12 +30,13 @@ class Database extends Config
      *
      * @var array
      */
+
     public $default = [
         'DSN'      => '',
-        'hostname' => 'us-cdbr-east-05.cleardb.net',
-        'username' => 'bad353055de493',
-        'password' => '16747c0b',
-        'database' => 'heroku_73ce887e8610f86',
+        'hostname' => 'zowis-db.c2yllv8khou4.us-east-2.rds.amazonaws.com',
+        'username' => 'hdz_guz',
+        'password' => '29-21-30-09',
+        'database' => 'zowis',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
