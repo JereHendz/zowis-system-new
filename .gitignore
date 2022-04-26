@@ -23,7 +23,7 @@ application/logs/*
 /vendor/
 
 #enviroment
-.env
+# .env
 
 ### CodeIgniter Patch ###
 
