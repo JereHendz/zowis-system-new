@@ -130,4 +130,4 @@ nb-configuration.xml
 /.php-cs-fixer.php
 
 #configuracion Config App
-Config/App.php
+app/Config/App.php
