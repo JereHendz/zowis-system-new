@@ -31,6 +31,10 @@ $routes->setAutoRoute(true);
 
 $routes->group('api', function($routes){
     $routes->resource('roles'); //api/roles
+    $routes->resource('users'); //api/Users
+    // $routes->get('login/(:any)', 'Users::login/$1'); //api/Users/login
+    $routes->post('login', 'Users::login');
+
 });
 
 // We get a performance increase by specifying the default

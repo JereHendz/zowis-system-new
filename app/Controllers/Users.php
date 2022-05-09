@@ -6,10 +6,17 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Users extends ResourceController
 {
-    protected $modelName = 'App\Models\RolesModel';
+    protected $modelName = 'App\Models\UserModel';
     protected $format    = 'json';
 
     public function index(){
+        // $email =$this->input->get("email");
+        // $password =$this->input->raw_input_stream;
+
+        // 
+        // echo "jere";
+        // echo $password;
+        // return $form;
         return $this->respond($this->model->findAll());
     }
 
@@ -56,6 +63,15 @@ class Users extends ResourceController
         return $this->respondDeleted([
             'message'=>"Registro {$id} fue eliminado"
         ]);
+    }
+
+    public function login(){
+        
+        // $email=$this->request->getPost('email');
+        $form =$this->request->getJSON(true);
+        $email=$form['email'];
+        $password=$form['password'];
+        echo $password;
     }
 
 }
