@@ -39,4 +39,13 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function credential($userName, $password)
+    {
+        # code...
+        $sql="SELECT * FROM  users WHERE userName='$userName' AND password='$password'";
+        $query = $this->db->query($sql);        
+
+        return ($query->getNumRows()>0) ? $query->getResultArray():array();
+    }
 }

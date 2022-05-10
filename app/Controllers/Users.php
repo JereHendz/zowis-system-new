@@ -71,7 +71,12 @@ class Users extends ResourceController
         $form =$this->request->getJSON(true);
         $email=$form['email'];
         $password=$form['password'];
-        echo $password;
+        $data=$this->model->credential($email, $password);
+        if (count($data)<=0) {
+            // Data did not validate
+             return $this->failValidationErrors("User not found");
+         } 
+         return $this->respondCreated(['message'=>'Logeado correctamente','response'=>true]);
     }
 
 }
