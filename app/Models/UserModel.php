@@ -44,8 +44,15 @@ class UserModel extends Model
     {
         # code...
         $sql="SELECT * FROM  users WHERE userName='$userName' AND password='$password'";
-        $query = $this->db->query($sql);        
-
+        $query = $this->db->query($sql);     
         return ($query->getNumRows()>0) ? $query->getResultArray():array();
     }
+
+    // public function getTypesReturnOnSale()
+    // {
+    //     $this->db->where("status ", 1);
+    //     $query=$this->db->get('returnOnSaleType');
+    //     return ($query->num_rows() > 0) ? $query->result_array():array();
+    // }
+
 }

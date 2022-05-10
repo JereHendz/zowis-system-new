@@ -3,11 +3,15 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\UserModel;
 
 class Users extends ResourceController
 {
-    protected $modelName = 'App\Models\UserModel';
+    public  $userModel;
+
+
     protected $format    = 'json';
+
 
     public function index(){
         // $email =$this->input->get("email");
@@ -66,12 +70,12 @@ class Users extends ResourceController
     }
 
     public function login(){
+        $userModel = new UserModel();
         
-        // $email=$this->request->getPost('email');
         $form =$this->request->getJSON(true);
         $email=$form['email'];
         $password=$form['password'];
-        $data=$this->model->credential($email, $password);
+        $data=$userModel->credential($email, $password);
         if (count($data)<=0) {
             // Data did not validate
              return $this->failValidationErrors("User not found");
