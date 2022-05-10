@@ -34,7 +34,7 @@ $routes->group('api', function($routes){
     $routes->resource('users'); //api/Users
     // $routes->get('login/(:any)', 'Users::login/$1'); //api/Users/login
     $routes->post('login', 'Users::login');
-
+    $routes->post('create', 'Users::create');
 });
 
 // We get a performance increase by specifying the default

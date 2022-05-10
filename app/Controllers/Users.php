@@ -7,9 +7,6 @@ use App\Models\UserModel;
 
 class Users extends ResourceController
 {
-    public  $userModel;
-
-
     protected $format    = 'json';
 
 
@@ -25,15 +22,14 @@ class Users extends ResourceController
     }
 
     public function create(){
+        $userModel = new UserModel();
+        
         $form =$this->request->getJSON(true);
-
-        if (!$id=$this->model->insert($form)) {
-           // Data did not validate
-            return $this->failValidationErrors($this->model->errors());
-        }
-
-        $user=$this->model->find($id);
-        return $this->respondCreated(['message'=>'Registro creado correctamente','data'=>$user]);
+        $userName=$form['userName'];
+        $email=$form['email'];
+        $password=$form['password'];
+  
+         return $this->respondCreated(['message'=>'Creado con éxito correctamente','response'=>true,'data'=>$userName]);
     }
 
     public function update($id = null){
