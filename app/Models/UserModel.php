@@ -14,7 +14,7 @@ class UserModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['idEmployee','userName','password', 'temporaryKey','status','whodidit', 'whoCreated','createDate','updateDate'];
+    protected $allowedFields    = ['idEmployee','userName','password', 'temporaryKey','status','whodidit', 'whoCreated','createDate','updateDate', 'email'];
 
     // Dates
     protected $useTimestamps = false;
@@ -24,8 +24,26 @@ class UserModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'userName'     => 'required|is_unique[users.userName]',
+        'email'        => 'required|valid_email|is_unique[users.email]',
+        'password'     => 'required',
+        'passConfirm' => 'required_with[password]|matches[password]',
+    ];
+    protected $validationMessages   = [
+        'userName'=>[
+            'required'=>'El campo nombre de usuario es requerido.',
+            'is_unique' => 'Lo sentimos mucho el usuario ya ha sido registrado, por favor ingrese otro usuario.',
+        ],
+        'password'=>[
+            'required'=>'El campo contraseña es requerido.'
+        ],
+        'passConfirm'=>[
+            'required'=>'Confirme la contraseña por favor.',
+            'matches'=>'Las contraseñas no coinciden. Verifique por favor'
+        ],
+
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
@@ -43,7 +61,7 @@ class UserModel extends Model
     public function credential($userName, $password)
     {
         # code...
-        $sql="SELECT * FROM  users WHERE userName='$userName' AND password='$password'";
+        $sql="SELECT * FROM  users WHERE (userName='$userName' OR email='$userName') AND password='$password'";
         $query = $this->db->query($sql);     
         return ($query->getNumRows()>0) ? $query->getResultArray():array();
     }
