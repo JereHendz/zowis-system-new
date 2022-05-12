@@ -15,8 +15,10 @@ class Users extends ResourceController
     public function index(){
         // $email =$this->input->get("email");
         // $password =$this->input->raw_input_stream;
+         // Instance of user model 
+         $userModel = new UserModel();
 
-        return $this->respond($this->model->findAll());
+        return $this->respond($userModel->findAll());
     }
 
     public function create(){
