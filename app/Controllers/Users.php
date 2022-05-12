@@ -38,17 +38,17 @@ class Users extends ResourceController
             'createDate' =>date('Y-m-d H:m:s'),
             'whoCreated'=>1,
             'whodidit'=>1,
-            'idEmployee'=>1
+            'idEmployee'=>$form['idEmployee'],
         ];          
         
         // Validating  information and save record
-        if(!$id=$userModel->insert($data)){
+        if(!$id = $userModel->insert($data)){
 
             return $this->failValidationErrors($userModel->errors());
         }
         
         // Get the user that has been saved
-         $userCreated=$userModel->find($id);
+         $userCreated = $userModel->find($id);
 
         //  Response using response trait of codeigniter 4
          return $this->respondCreated(['message'=>'Usuario creado correctamente','data'=>$data]);

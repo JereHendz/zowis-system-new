@@ -27,6 +27,7 @@ class UserModel extends Model
     protected $validationRules      = [
         'userName'     => 'required|is_unique[users.userName]',
         'email'        => 'required|valid_email|is_unique[users.email]',
+        'idEmployee'     => 'required',
         'password'     => 'required',
         'passConfirm' => 'required_with[password]|matches[password]',
     ];
@@ -34,6 +35,11 @@ class UserModel extends Model
         'userName'=>[
             'required'=>'El campo nombre de usuario es requerido.',
             'is_unique' => 'Lo sentimos mucho el usuario ya ha sido registrado, por favor ingrese otro usuario.',
+        ],
+        'email'=>[
+            'required'=>'El campo email es requerido.',
+            'valid_email'=>'El email ingresado no tiene un formato válido, intente de nuevo.',
+            'is_unique' => 'El email ya está siendo utilizado por otro usuario, por favor ingrese otro email.',
         ],
         'password'=>[
             'required'=>'El campo contraseña es requerido.'
