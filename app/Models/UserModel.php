@@ -31,6 +31,7 @@ class UserModel extends Model
         'password'     => 'required',
         'passConfirm' => 'required_with[password]|matches[password]',
     ];
+
     protected $validationMessages   = [
         'userName'=>[
             'required'=>'El campo nombre de usuario es requerido.',
@@ -40,6 +41,9 @@ class UserModel extends Model
             'required'=>'El campo email es requerido.',
             'valid_email'=>'El email ingresado no tiene un formato válido, intente de nuevo.',
             'is_unique' => 'El email ya está siendo utilizado por otro usuario, por favor ingrese otro email.',
+        ],
+        'idEmployee'=>[
+            'required'=>'Debe asignar un empleado al usuario.',
         ],
         'password'=>[
             'required'=>'El campo contraseña es requerido.'

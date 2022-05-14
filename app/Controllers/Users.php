@@ -38,6 +38,7 @@ class Users extends ResourceController
             'createDate' =>date('Y-m-d H:m:s'),
             'whoCreated'=>1,
             'whodidit'=>1,
+            'temporaryKey'=>1,
             'idEmployee'=>$form['idEmployee'],
         ];          
         
