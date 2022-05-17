@@ -40,4 +40,10 @@ class DepartmentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getDepartmentsByCountry($id){
+        $sql="SELECT * FROM  departments WHERE idCountry='$id'";
+        $query = $this->db->query($sql);     
+        return ($query->getNumRows()>0) ? $query->getResultArray():array();
+    }
 }
