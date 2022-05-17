@@ -17,7 +17,7 @@ class Departments extends ResourceController
     }
     public function show($id = null)
     {
-        // this is a test
+        // Instance  Department
         $deparmentModel = new DepartmentModel();
 
         if (!$data=$deparmentModel->getDepartmentsByCountry($id)) {
