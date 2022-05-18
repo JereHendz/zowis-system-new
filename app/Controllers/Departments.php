@@ -15,4 +15,14 @@ class Departments extends ResourceController
 
         return $this->respond($deparmentModel->findAll());
     }
+    public function show($id = null)
+    {
+        $deparmentModel = new DepartmentModel();
+
+        if (!$data=$deparmentModel->getDepartmentsByCountry($id)) {
+            return $this->failNotFound();
+        }
+
+        return $this->respond($data);
+    }
 }

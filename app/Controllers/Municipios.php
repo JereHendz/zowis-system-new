@@ -16,4 +16,14 @@ class Municipios extends ResourceController
 
         return $this->respond($municipiosModel->findAll());
     }
+    public function show($id = null)
+    {
+        $municipiosModel = new MunicipiosModel();
+
+        if (!$data=$municipiosModel->getMunicipiosByDepto($id)) {
+            return $this->failNotFound();
+        }
+
+        return $this->respond($data);
+    }
 }

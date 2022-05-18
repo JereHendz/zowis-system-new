@@ -34,7 +34,7 @@ $routes->group('api', function($routes){
     $routes->resource('users'); //api/Users
     $routes->resource('employees'); //api/Employees
     $routes->resource('country'); //api/Country
-    $routes->resource('deparments'); //api/Departments
+    $routes->resource('departments'); //api/Departments
     $routes->resource('municipios'); //api/Municipios
 
 
