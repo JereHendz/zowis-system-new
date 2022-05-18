@@ -20,7 +20,11 @@ class Departments extends ResourceController
         $thisTest=false;
         $thiHas=true;
         if ($thisHas==true) {
-            // Don ju rat
+            // Don ju mouse
+            // this is a test
+            $rat=true;
+            $see=false;
+
         }
         $deparmentModel = new DepartmentModel();
 
