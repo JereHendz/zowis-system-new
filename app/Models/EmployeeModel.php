@@ -26,8 +26,14 @@ class EmployeeModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'email'        => 'is_unique[employees.email]',
+    ];
+    protected $validationMessages   = [
+        'email'=>[
+            'is_unique' => 'Lo sentimos mucho el email ya ha sido registrado, por favor ingrese otro.',
+        ],
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
