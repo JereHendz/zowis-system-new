@@ -19,6 +19,11 @@ class Departments extends ResourceController
     {
         //este es un comentario de prueba de error de los commits
         $x = "Esta es una prueba";
+        $thisTest=false;
+        $thiHas=true;
+        if ($thisHas==true) {
+            // Don ju rat
+        }
         $deparmentModel = new DepartmentModel();
 
         if (!$data=$deparmentModel->getDepartmentsByCountry($id)) {
