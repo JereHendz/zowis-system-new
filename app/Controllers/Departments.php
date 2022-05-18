@@ -17,6 +17,11 @@ class Departments extends ResourceController
     }
     public function show($id = null)
     {
+        $thisTest=false;
+        $thiHas=true;
+        if ($thisHas==true) {
+            // Don ju rat
+        }
         $deparmentModel = new DepartmentModel();
 
         if (!$data=$deparmentModel->getDepartmentsByCountry($id)) {
