@@ -17,6 +17,15 @@ class Departments extends ResourceController
     }
     public function show($id = null)
     {
+        $thisTest=false;
+        $thiHas=true;
+        if ($thisHas==true) {
+            // Don ju mouse
+            // this is a test
+            $rat=true;
+            $see=false;
+
+        }
         //este es un comentario de prueba de error de los commits
         $x = "Esta es una prueba";
         $thisTest=false;
