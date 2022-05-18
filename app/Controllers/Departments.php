@@ -35,6 +35,8 @@ class Departments extends ResourceController
             $xy="we did it";
             $w="ddd";
             // test test
+            //este rata esta probando
+            $x = "otra prueba";
         }
         $deparmentModel = new DepartmentModel();
 
