@@ -17,6 +17,8 @@ class Departments extends ResourceController
     }
     public function show($id = null)
     {
+        //este es un comentario de prueba de error de los commits
+        $x = "Esta es una prueba";
         $deparmentModel = new DepartmentModel();
 
         if (!$data=$deparmentModel->getDepartmentsByCountry($id)) {
