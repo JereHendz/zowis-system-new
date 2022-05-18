@@ -9,7 +9,7 @@ date_default_timezone_set('America/El_Salvador');
 
 class Users extends ResourceController
 {
-    protected $format    = 'json';
+    protected $format = 'json';
 
 
     public function index(){
@@ -100,7 +100,7 @@ class Users extends ResourceController
 
         // If there is a user
         if (count($data)<=0) {
-            // We did not found the user
+            // We did not found the user test
              return $this->failValidationErrors("User not found");
          } 
 
