@@ -47,4 +47,14 @@ class EmployeeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getEmplooyees()
+    {
+        # code...
+        $sql="SELECT employees.*, municipios.idDepto FROM employees
+        LEFT JOIN municipios ON municipios.id=employees.idMunicipio";
+        $query = $this->db->query($sql);     
+        return ($query->getNumRows()>0) ? $query->getResultArray():array();
+    }
+
 }

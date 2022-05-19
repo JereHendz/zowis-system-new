@@ -104,7 +104,7 @@ class Users extends ResourceController
              return $this->failValidationErrors("User not found");
          } 
 
-         return $this->respondCreated(['message'=>'Logeado correctamente','response'=>true]);
+         return $this->respondCreated(['message'=>'Logeado correctamente','response'=>$data]);
     }
 
 }
