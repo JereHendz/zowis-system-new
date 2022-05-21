@@ -13,47 +13,50 @@ class Users extends ResourceController
 
 
     public function index(){
-        // $email =$this->input->get("email");
-        // $password =$this->input->raw_input_stream;
-         // Instance of user model 
-         $userModel = new UserModel();
+        //Get all users
+        $userModel = new UserModel();
 
-        return $this->respond($userModel->findAll());
+        $data = $userModel->findAll();
+
+        return $this->respond($data);
     }
 
     public function create(){
-
+        $encrypter = \Config\Services::encrypter();
         // Instance of user model 
         $userModel = new UserModel();
 
         // Get the form of login 
-        $form =$this->request->getJSON(true);
-        
+        $form = $this->request->getJSON(true);
+
+        //encrypt password
+        $password=base64_encode($encrypter->encrypt($form['password']));
+
+        // para desencriptar usar lo siguiente
+        // $pass1=base64_decode($password);
+        // $passDecrypted = $encrypter->decrypt($pass1);
+
         // Create user array, set up default information
         $data = [
             'userName' => $form['userName'],
-            'email'    => $form['email'],
-            'password'    => $form['password'],
-            'passConfirm'  => $form['passConfirm'],
-            'createDate' =>date('Y-m-d H:m:s'),
-            'whoCreated'=>1,
-            'whodidit'=>1,
-            'temporaryKey'=>1,
-            'idEmployee'=>$form['idEmployee'],
-        ];          
-        
+            'email' => $form['email'],
+            'password' => $password,
+            'idEmployee' => $form['idEmployee'],
+            'temporaryKey' => 1,
+            'whoCreated' => $form['whoCreated'],
+            'createDate' => date('Y-m-d H:m:s'),
+        ];  
+                
         // Validating  information and save record
         if(!$id = $userModel->insert($data)){
-
             return $this->failValidationErrors($userModel->errors());
         }
         
         // Get the user that has been saved
-         $userCreated = $userModel->find($id);
+        // $userCreated = $userModel->find($id);
 
-        //  Response using response trait of codeigniter 4
-         return $this->respondCreated(['message'=>'Usuario creado correctamente','data'=>$data]);
-  
+        // Response using response trait of codeigniter 4
+        return $this->respondCreated(['message'=>'Usuario creado correctamente','data'=>$data]);
     }
 
     public function update($id = null){
@@ -90,19 +93,29 @@ class Users extends ResourceController
     }
 
     public function login(){
+        $encrypter = \Config\Services::encrypter();
         $userModel = new UserModel();
         
         // Get the credential user and password
         $form =$this->request->getJSON(true);
-        
-        // Validating  the credential
-        $data=$userModel->credential($form['email'], $form['password']);
 
+        // Validating  the credential
+        $password = $form['password'];
+        $res = $userModel->credential($form['email']);
         // If there is a user
-        if (count($data)<=0) {
+        if (count($res) <= 0) {
             // We did not found the user test
              return $this->failValidationErrors("User not found");
-         } 
+        }
+
+        $passBd = $res[0]['password'];
+        $pass1=base64_decode($passBd);
+        $passDecrypted = $encrypter->decrypt($pass1);
+        if($password == $passDecrypted){
+            $data = $res;
+        }else{
+            return $this->failValidationErrors("Invalid pass");
+        }
 
          return $this->respondCreated(['message'=>'Logeado correctamente','response'=>$data]);
     }

@@ -28,8 +28,7 @@ class UserModel extends Model
         'userName'     => 'required|is_unique[users.userName]',
         'email'        => 'required|valid_email|is_unique[users.email]',
         'idEmployee'     => 'required',
-        'password'     => 'required',
-        'passConfirm' => 'required_with[password]|matches[password]',
+        'password'     => 'required'
     ];
 
     protected $validationMessages   = [
@@ -47,11 +46,7 @@ class UserModel extends Model
         ],
         'password'=>[
             'required'=>'El campo contraseña es requerido.'
-        ],
-        'passConfirm'=>[
-            'required'=>'Confirme la contraseña por favor.',
-            'matches'=>'Las contraseñas no coinciden. Verifique por favor'
-        ],
+        ]
 
     ];
     protected $skipValidation       = false;
@@ -68,12 +63,13 @@ class UserModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function credential($userName, $password)
+    public function credential($userName)
     {
-        # code...
-        $sql="SELECT * FROM  users WHERE (userName='$userName' OR email='$userName') AND password='$password'";
-        $query = $this->db->query($sql);     
-        return ($query->getNumRows()>0) ? $query->getResultArray():array();
+        $encrypter = \Config\Services::encrypter();
+
+        $sql="SELECT * FROM  users WHERE (userName='$userName' OR email='$userName')";
+        $query = $this->db->query($sql); 
+        return ($query->getNumRows() > 0) ? $query->getResultArray():array();
     }
 
     // public function getTypesReturnOnSale()
