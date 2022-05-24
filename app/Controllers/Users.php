@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\UserModel;
+use App\Models\EmployeeModel;
 
 date_default_timezone_set('America/El_Salvador');
 
@@ -11,12 +12,15 @@ class Users extends ResourceController
 {
     protected $format = 'json';
 
-
     public function index(){
         //Get all users
         $userModel = new UserModel();
+        $employeeModel = new EmployeeModel();
 
-        $data = $userModel->findAll();
+        $data = array(
+            'users' => $userModel->findAll(),
+            'employees' => $employeeModel->findAll(),
+        );
 
         return $this->respond($data);
     }
