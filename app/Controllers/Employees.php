@@ -71,4 +71,29 @@ class Employees extends ResourceController
         //  Response using response trait of codeigniter 4
         return $this->respondCreated(['message' => 'Empleado creado correctamente', 'data' => $employeeCreated]);
     }
+
+    public function update($id = null){
+
+        $form=$this->request->getJSON(true);
+        $employeeModel = new EmployeeModel();
+
+        
+        if(empty($form)){
+            return $this->failValidationErrors('Nothing to update');
+        }
+
+        if(!$employeeModel->find($id)){
+            return $this->failNotFound();
+        }
+
+        if(!$employeeModel->update($id, $form)){
+            return $this->failValidationErrors($employeeModel->errors());
+        }
+
+        return $this->respondUpdated([
+            'message'=>'Updated successfully',
+            'data'=>$employeeModel->find($id),
+        ]);
+    }
+
 }
