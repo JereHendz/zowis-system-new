@@ -96,4 +96,23 @@ class Employees extends ResourceController
         ]);
     }
 
+    public function show($id = null){
+        $employeeModel = new EmployeeModel();
+        $data = array(
+            'employees' => $employeeModel->getEmplooyees()
+        );
+
+        return $this->respond($data);
+    }
+
+    public function loadEmployees(){
+        $employeeModel = new EmployeeModel();
+        $data = array(
+            'employees' => $employeeModel->getEmplooyees()
+        );
+
+        return $this->respond($data);
+    }
+    
+
 }

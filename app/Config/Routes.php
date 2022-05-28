@@ -37,6 +37,8 @@ $routes->group('api', function($routes){
     $routes->resource('departments'); //api/Departments
     $routes->resource('municipios'); //api/Municipios
     $routes->resource('processstate'); //api/ProcessState
+    $routes->add('loadEmp', 'Employees::loadEmployees');
+
     // $routes->post('statusR', 'ProcessState::show/$1');
 
 
