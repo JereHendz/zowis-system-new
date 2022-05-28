@@ -20,12 +20,14 @@ class ProcessState extends ResourceController
 
     public function show($id = null)
     {
-        $processStateMoldel = new ProcessStateModel();
+        
+        $processModel = new ProcessStateModel();
 
-        if (!$data=$processStateMoldel->getStateByType($id)) {
+        if (!$data=$processModel->getStateByType($id)) {
             return $this->failNotFound(); 
         }
-
-        return $this->respond($data);
+        
+        $info["listStatus"]=$data;
+        return $this->respond($info);
     }
 }

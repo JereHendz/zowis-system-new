@@ -41,7 +41,7 @@ class ProcessStateModel extends Model
     protected $afterDelete    = [];
 
     public function getStateByType($id){
-        $sql="SELECT * FROM  processState WHERE idStateType='$id' ";
+        $sql="SELECT * FROM  processStates WHERE idStateType='$id' ";
         $query = $this->db->query($sql);     
         return ($query->getNumRows()>0) ? $query->getResultArray():array();
     }
