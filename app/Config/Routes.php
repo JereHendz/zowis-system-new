@@ -36,6 +36,9 @@ $routes->group('api', function($routes){
     $routes->resource('country'); //api/Country
     $routes->resource('departments'); //api/Departments
     $routes->resource('municipios'); //api/Municipios
+    $routes->resource('processstate'); //api/ProcessState
+    // $routes->post('statusR', 'ProcessState::show/$1');
+
 
 
     // $routes->get('login/(:any)', 'Users::login/$1'); //api/Users/login
