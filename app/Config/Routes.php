@@ -38,6 +38,12 @@ $routes->group('api', function($routes){
     $routes->resource('municipios'); //api/Municipios
     $routes->resource('processstate'); //api/ProcessState
     $routes->add('loadEmp', 'Employees::loadEmployees');
+    $routes->resource('categories'); //api/Categories
+    $routes->resource('subcategories'); //api/Subcategories
+    $routes->resource('providers'); //api/Providers
+    $routes->add('providersComplete', 'Providers::providersComplete');
+
+
 
     // $routes->post('statusR', 'ProcessState::show/$1');
 
