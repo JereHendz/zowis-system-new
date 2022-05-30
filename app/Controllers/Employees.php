@@ -85,6 +85,7 @@ class Employees extends ResourceController
         if(!$employeeModel->find($id)){
             return $this->failNotFound();
         }
+        $form['updateDate']=date('Y-m-d H:m:s');
 
         if(!$employeeModel->update($id, $form)){
             return $this->failValidationErrors($employeeModel->errors());
