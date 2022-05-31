@@ -42,7 +42,8 @@ $routes->group('api', function($routes){
     $routes->resource('subcategories'); //api/Subcategories
     $routes->resource('providers'); //api/Providers
     $routes->add('providersComplete', 'Providers::providersComplete');
-
+    $routes->resource('brands'); //api/Brands
+    
 
 
     // $routes->post('statusR', 'ProcessState::show/$1');
