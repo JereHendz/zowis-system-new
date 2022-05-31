@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\CategoriesModel;
+use App\Models\ProcessStateModel;
 
 class Categories extends ResourceController
 {
@@ -13,9 +14,11 @@ class Categories extends ResourceController
     {
         //Get all categories
         $categoriesModel = new CategoriesModel();
+        $processState = new ProcessStateModel();
 
         $data = array(
-            'categories' => $categoriesModel->findAll()
+            'categories' => $categoriesModel->findAll(),
+            'status' => $processState->getStateByType(1)
         );
 
         return $this->respond($data);
