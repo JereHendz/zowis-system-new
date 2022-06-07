@@ -16,23 +16,7 @@ class Providers extends ResourceController
     public function index(){
         $providersModel = new ProvidersModel();
         $data = array(
-            'providers' => $providersModel->getProviders()
-        );
-
-        return $this->respond($data);
-    }
-
-    public function providersComplete(){
-        $providersModel = new ProvidersModel();
-        $countries= new CountryModel();
-        $department= new DepartmentModel();
-        $municipios= new MunicipiosModel();
-
-        $data = array(
-            'providers' => $providersModel->getProviders(),
-            'countries' => $countries->findAll(),
-            'department' => $department->findAll(),
-            'municipios' => $municipios->findAll(),
+            'providers' => $providersModel->findAll()
         );
 
         return $this->respond($data);
@@ -47,21 +31,19 @@ class Providers extends ResourceController
 
         // Create provider array, set up default information
         $data = [
-            'idCountry'    => $form['idCountry'],
-            'idMunicipio'  => $form['idMunicipio'],
             'comercialName'=> $form['comercialName'],
             'giro'         => $form['giro'],
             'document'     => $form['document'],
             'address'      => $form['address'],
             'email'        => $form['email'],
             'phoneNumber'  => $form['phoneNumber'],
+            'img'          => '',
             'whoCreated'   => $form['whoCreated'],
             'createDate'   => date('Y-m-d H:m:s'),
         ];
 
         // Validating  information and save record
         if (!$id = $providersModel->insert($data)) {
-
             return $this->failValidationErrors($providersModel->errors());
         }
 
