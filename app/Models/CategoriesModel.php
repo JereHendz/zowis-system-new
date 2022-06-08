@@ -43,4 +43,12 @@ class CategoriesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getCategoriesByStatus($status)
+    {
+        $status=!empty($status) ? " WHERE status in($status) " : "";
+        $sql="SELECT * FROM  categories $status";
+        $query = $this->db->query($sql); 
+        return ($query->getNumRows() > 0) ? $query->getResultArray():array();
+    }
 }

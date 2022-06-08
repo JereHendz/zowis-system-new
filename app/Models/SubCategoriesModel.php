@@ -6,6 +6,7 @@ use CodeIgniter\Model;
 
 class SubCategoriesModel extends Model
 {
+
     protected $DBGroup          = 'default';
     protected $table            = 'sub_categories';
     protected $primaryKey       = 'id';
@@ -14,7 +15,7 @@ class SubCategoriesModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['idCategory','name', 'description','status','whodidit', 'whoCreated','createDate','updateDate'];
+    protected $allowedFields    = ['idCategory', 'name', 'description', 'status', 'whodidit', 'whoCreated', 'createDate', 'updateDate'];
 
     // Dates
     protected $useTimestamps = false;
@@ -45,4 +46,22 @@ class SubCategoriesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getSubCategoriesByStatus($status)
+    {
+        $status = !empty($status) ? " WHERE status in($status) " : "";
+        $sql = "SELECT * FROM  sub_categories $status";
+        $query = $this->db->query($sql);
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
+    }
+
+    public function getSubCategoriesByIdCategory($idCategory)
+    {
+
+        $this->table('sub_categories');
+        $this->where('status', 1);
+        $this->where('idCategory =', $idCategory);
+        $query   = $this->get();
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
+    }
 }

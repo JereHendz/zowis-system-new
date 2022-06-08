@@ -39,4 +39,12 @@ class BrandsModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getBrandsByStatus($status)
+    {
+        $status=!empty($status) ? " WHERE status in($status) " : "";
+        $sql="SELECT * FROM  brands $status";
+        $query = $this->db->query($sql); 
+        return ($query->getNumRows() > 0) ? $query->getResultArray():array();
+    }
 }

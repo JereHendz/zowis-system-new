@@ -4,19 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProvidersModel extends Model
+class ProducsModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'providers';
+    protected $table            = 'producs';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['idCountry','idMunicipio',
-    'comercialName','giro','document','address','email','phoneNumber','img',
-    'status','whodidit','whoCreated','createDate','updateDate'];
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -41,22 +39,4 @@ class ProvidersModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    //lista de proveedores
-    public function getProviders(){
-        $sql = "SELECT p.*, m.idDepto FROM providers p
-                LEFT JOIN municipios m ON p.id = p.idMunicipio";
-        $query = $this->db->query($sql);     
-        return ($query->getNumRows()>0) ? $query->getResultArray():array();
-    }
-
-    public function getProvidersByStatus($status)
-    {
-
-        $this->table('providers');
-        $this->where('status', $status);
-        $query   = $this->get();
-        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
-    }
-
 }

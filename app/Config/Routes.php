@@ -43,8 +43,10 @@ $routes->group('api', function($routes){
     $routes->resource('providers'); //api/Providers
     $routes->add('providersComplete', 'Providers::providersComplete');
     $routes->resource('brands'); //api/Brands
+    $routes->resource('products'); //api/Products
+    $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
+    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');  
     
-
 
     // $routes->post('statusR', 'ProcessState::show/$1');
 
