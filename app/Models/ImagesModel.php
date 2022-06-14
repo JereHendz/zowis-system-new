@@ -4,32 +4,25 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProducsModel extends Model
+class ImagesModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'products';
+    protected $table            = 'images_products';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    =
-    [
-        'id',
-        'productCode',
-        'productName',
-        'description',
-        'stockProduct',
-        'stockLimit',
-        'percentageProfit',
+    protected $allowedFields    = [
+        'link',
         'status',
-        'whodidit',
+        'description',
         'whoCreated',
+        'whodidit',
         'createDate',
         'updateDate',
-        'idSubCategory',
-        'productDiscount'
+        'idProduct'
     ];
 
     // Dates
@@ -55,19 +48,4 @@ class ProducsModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getProductCode()
-    {
-        $this->select('count(*) productCode');
-        $this->table("products");
-        $query = $this->get();
-        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
-    }
-
-    public function saveDetailProduct($data)
-    {
-        $this->table('product_details');
-        $this->save('product_details',$data);
-        return ($this->affected_rows() != 1) ? false : true;
-    }
 }

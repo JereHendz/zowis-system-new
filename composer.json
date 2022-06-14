@@ -11,6 +11,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "agungsugiarto/codeigniter4-cors": "^2.0",
+        "cloudinary/cloudinary_php": "^2.7",
         "kint-php/kint": "^4.0",
         "laminas/laminas-escaper": "^2.9",
         "psr/log": "^1.1"
