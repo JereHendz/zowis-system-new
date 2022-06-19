@@ -64,10 +64,21 @@ class ProducsModel extends Model
         return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
     }
 
-    public function saveDetailProduct($data)
+    public function getProductWithImage()
     {
-        $this->table('product_details');
-        $this->save('product_details',$data);
-        return ($this->affected_rows() != 1) ? false : true;
+        $this->select('products.id, products.productName, products.description, images_products.link',false);
+        $this->table("products");
+        $this->join("product_details","product_details.idProduct=products.id", 'left');
+        $this->join("images_products","images_products.idProduct=products.id", 'left');
+        $this->groupBy("products.id");
+        $query = $this->get();
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
     }
+
+    // public function saveDetailProduct($data)
+    // {
+    //     $this->table('product_details');
+    //     $this->save('product_details',$data);
+    //     return ($this->affected_rows() != 1) ? false : true;
+    // }
 }

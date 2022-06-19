@@ -90,7 +90,7 @@ class Products extends ResourceController
                 "whoCreated" => $whoCreated,
                 "createDate" => date('Y-m-d H:i:s')
             );
-            
+
             if (!$idProduct = $productsModel->insert($arrayProduct)) {
                 return $this->failValidationErrors($productsModel->errors());
             }
@@ -122,13 +122,12 @@ class Products extends ResourceController
             if (!$idProductDetail = $productDetailModel->insert($arrayProductDetail)) {
                 return $this->failValidationErrors($productDetailModel->errors());
             }
-            $updateProduct= array(
-                "stockProduct"=>$productDetail['quantity']
+            $updateProduct = array(
+                "stockProduct" => $productDetail['quantity']
             );
-            if(!$productsModel->update($idProduct, $updateProduct)){
+            if (!$productsModel->update($idProduct, $updateProduct)) {
                 return $this->failValidationErrors($productsModel->errors());
             }
-
         }
 
         $uploadPath = "../Uploads/";
@@ -151,7 +150,7 @@ class Products extends ResourceController
                     "createDate" => date('Y-m-d H:i:s')
                 );
 
-                
+
                 if (!$saveImage = $imagesModel->insert($arrayImages)) {
                     return $this->failValidationErrors($imagesModel->errors());
                 }
@@ -166,5 +165,106 @@ class Products extends ResourceController
         }
 
         return $this->respondCreated(['message' => 'Create Successfully', 'data' => $idProduct]);
+    }
+
+    public function getAllProductsWithImages()
+    {
+        $productModel = new ProducsModel();
+        $pr = $productModel->getProductWithImage();
+        $products = array();
+        foreach ($pr as $key => $value) {
+            $products = array(
+                "id" => $value['id'],
+                "img" => "ecommerce/01.jpg",
+                "name" => "Man's Shirt",
+                "note" => "Simply dummy text of the printing",
+                "discription" => "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+                "discountPrice" => "350.00",
+                "status" => "none",
+                "price" => 100.00,
+                "stock" => "In stock",
+                "review" => "(250 review)",
+                "category" => "Man",
+                "colors"=>array(
+                    "White",
+                    "gray"
+                ),
+                "size"=> array(
+                    "M",
+                    "L",
+                    "XL"
+                ),
+                "tags"=> array(
+                    "Diesel",
+                    "Hudson",
+                    "Lee"
+                ),
+                "variants"=> array(
+                    "w"=>array(
+                        "color"=> "White",
+                        "images"=> "ecommerce/01.jpg"
+                    ),
+                    "y"=>array(
+                        "color"=> "gray",
+                        "images"=> "ecommerce/04.jpg"
+                    ),
+                    "f"=>array(
+                        "color"=> "black",
+                        "images"=> "ecommerce/02.jpg"
+                    ),
+                    "e"=>array(
+                        "color"=> "pink",
+                        "images"=> "ecommerce/03.jpg"
+                    )
+                )
+            );
+        }
+
+        return json_encode($products);
+        // {
+        //     "id": 1,
+        //     "img": "ecommerce/01.jpg",
+        //     "name":"Man's Shirt",
+        //     "note": "Simply dummy text of the printing",
+        //     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+        //     "discountPrice": "350.00",
+        //     "status":"none",
+        //     "price": 100.00,
+        //     "stock": "In stock",
+        //     "review": "(250 review)",
+        //     "category": "Man",
+        //     "colors": [
+        //         "White",
+        //         "gray"
+        //     ],
+        //     "size": [
+        //         "M",
+        //         "L",
+        //         "XL"
+        //     ],
+        //     "tags": [
+        //         "Diesel",
+        //         "Hudson",
+        //         "Lee"
+        //     ],
+        //     "variants": [
+        //         {
+        //             "color": "White",
+        //             "images": "ecommerce/01.jpg"
+        //         },
+        //         {
+        //             "color": "gray",
+        //             "images": "ecommerce/04.jpg"
+        //         },
+        //         {
+        //             "color": "black",
+        //             "images": "ecommerce/02.jpg"
+        //         },
+        //         {
+        //             "color": "pink",
+        //             "images": "ecommerce/03.jpg"
+        //         }
+        //     ]
+        // },
     }
 }
