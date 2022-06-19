@@ -44,6 +44,7 @@ $routes->group('api', function($routes){
     $routes->add('providersComplete', 'Providers::providersComplete');
     $routes->resource('brands'); //api/Brands
     $routes->resource('products'); //api/Products
+    $routes->add('getProductImages', 'Products::getAllProductsWithImages');
     $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
     $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');  
     
