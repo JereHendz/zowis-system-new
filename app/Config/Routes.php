@@ -45,7 +45,9 @@ $routes->group('api', function($routes){
     $routes->resource('brands'); //api/Brands
     $routes->resource('products'); //api/Products
     $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
-    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');  
+    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1'); 
+    $routes->resource('sales'); //api/Providers
+    $routes->resource('clients'); //api/Providers
     
 
     // $routes->post('statusR', 'ProcessState::show/$1');
