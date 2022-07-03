@@ -47,7 +47,10 @@ $routes->group('api', function($routes){
     $routes->add('getProductImages', 'Products::getAllProductsWithImages');
     $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
     $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');  
-    
+    $routes->add('imagesById/(:any)', 'Products::getImagesByProduct/$1');  
+    $routes->add('uptImage', 'Products::updateImage');    
+    $routes->add('createImages', 'Products::createImagesByProduct');    
+
 
     // $routes->post('statusR', 'ProcessState::show/$1');
 
