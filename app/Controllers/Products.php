@@ -91,7 +91,8 @@ class Products extends ResourceController
                 "percentageProfit" => floatval($informationProduct['percentageProfit']),
                 "idSubCategory" => intval($informationProduct['idSubCategory']),
                 "whoCreated" => $whoCreated,
-                "createDate" => date('Y-m-d H:i:s')
+                "createDate" => date('Y-m-d H:i:s'),
+                "barcode" => $informationProduct['barcode']
             );
 
             if (!$idProduct = $productsModel->insert($arrayProduct)) {
@@ -106,7 +107,6 @@ class Products extends ResourceController
 
         if (count($productDetail) > 0) {
             $arrayProductDetail = array(
-                "barcode" => $productDetail['barcode'],
                 "idProvider" => intval($productDetail['idProvider']),
                 "idBrand" => intval($productDetail['idBrand']),
                 "quantity" => intval($productDetail['quantity']),
@@ -126,7 +126,9 @@ class Products extends ResourceController
                 return $this->failValidationErrors($productDetailModel->errors());
             }
             $updateProduct = array(
-                "stockProduct" => $productDetail['quantity']
+                "stockProduct" => $productDetail['quantity'],
+                "unitSalePriceAvg"=> $productDetail['unitSalePrice'],
+                "unitPurchasePriceAvg"=> $productDetail['unitPurchasePrice'],
             );
             if (!$productsModel->update($idProduct, $updateProduct)) {
                 return $this->failValidationErrors($productsModel->errors());
@@ -135,24 +137,28 @@ class Products extends ResourceController
 
         $uploadPath = "../Uploads/";
         $Fecha = date("YmdHis");
+        $contImg=0;
         foreach ($files as $img) {
 
             if ($img->isValid() && !$img->hasMoved()) {
                 $realName = $img->getName();
-                $nameCloudinary = explode('.', $realName)[0] . $Fecha;
+                $nameCloudinary = explode('.', $realName)[0] . $Fecha.$contImg;
+                $nameCloudinary = str_replace(" ", "", $nameCloudinary);
                 $pathName = $img->getRealPath();
                 $uploaded = (new UploadApi())->upload($pathName, [
                     'folder' => 'zowis/',
                     'public_id' => $nameCloudinary,
                 ]);
+                $contImg++;
 
                 $arrayImages = array(
                     "link" => $uploaded['url'],
                     "whoCreated" => $whoCreated,
                     "idProduct" => $idProduct,
-                    "createDate" => date('Y-m-d H:i:s')
+                    "createDate" => date('Y-m-d H:i:s'),
+                    "priority"=>$contImg,
+                    "publicIdCloudinary" => 'zowis/' . $nameCloudinary
                 );
-
 
                 if (!$saveImage = $imagesModel->insert($arrayImages)) {
                     return $this->failValidationErrors($imagesModel->errors());
@@ -344,7 +350,7 @@ class Products extends ResourceController
             $contImg++;
             if ($img->isValid() && !$img->hasMoved()) {
                 $realName = $img->getName();
-                $nameCloudinary = explode('.', $realName)[0] . $Fecha;
+                $nameCloudinary = explode('.', $realName)[0] . $Fecha.$contImg;
                 $nameCloudinary = str_replace(" ", "", $nameCloudinary);
                 $pathName = $img->getRealPath();
                 $uploaded = (new UploadApi())->upload($pathName, [
@@ -359,6 +365,8 @@ class Products extends ResourceController
                     "priority"=>$contImg,
                     "publicIdCloudinary" => 'zowis/' . $nameCloudinary
                 );
+
+                echo $nameCloudinary;
 
                 if (!$saveImage = $imagesModel->insert($arrayImages)) {
                     return $this->failValidationErrors($imagesModel->errors());

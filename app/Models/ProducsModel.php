@@ -29,7 +29,11 @@ class ProducsModel extends Model
         'createDate',
         'updateDate',
         'idSubCategory',
-        'productDiscount'
+        'productDiscount',
+        'barcode',
+        'unitSalePriceAvg',
+        'unitPurchasePriceAvg'
+
     ];
 
     // Dates
