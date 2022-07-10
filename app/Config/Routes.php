@@ -50,7 +50,7 @@ $routes->group('api', function($routes){
     $routes->add('imagesById/(:any)', 'Products::getImagesByProduct/$1');  
     $routes->add('uptImage', 'Products::updateImage');    
     $routes->add('createImages', 'Products::createImagesByProduct');    
-
+    $routes->add('addStockProduct', 'Products::createStockProduct');
 
     // $routes->post('statusR', 'ProcessState::show/$1');
 

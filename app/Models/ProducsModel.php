@@ -71,13 +71,23 @@ class ProducsModel extends Model
     public function getProductWithImage()
     {
         $this->select('products.id, products.productName, products.description, images_products.link,
-         product_details.barcode, product_details.unitSalePrice, products.productDiscount',false);
+         "" barcode, product_details.unitSalePrice, products.productDiscount',false);
         $this->table("products");
         $this->join("product_details","product_details.idProduct=products.id");
         $this->join("images_products","images_products.idProduct=products.id");
         $this->groupBy("products.id");
         $query = $this->get();
         return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
+    }
+
+    public function getAvgCost($idProduct)
+    {
+
+        $sql="SELECT SUM(product_details.unitPurchasePrice*product_details.stock) inventoryValue, products.stockProduct FROM product_details
+        JOIN products ON products.id=product_details.idProduct
+              where product_details.idProduct=$idProduct";
+        $query = $this->db->query($sql); 
+        return ($query->getNumRows() > 0) ? $query->getResultArray():array();
     }
 
     // public function saveDetailProduct($data)

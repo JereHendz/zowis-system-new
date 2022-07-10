@@ -15,7 +15,6 @@ class ProductDetailModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'barcode',
         'descriptionDetail',
         'unitPurchasePrice',
         'unitSalePrice',
@@ -31,8 +30,8 @@ class ProductDetailModel extends Model
         'idFirstLevelLocation',
         'idSecondLevelLocation',
         'idThirdLevelLocation',
-        'idProvider'
-
+        'idProvider',
+        'stock'
     ];
 
     // Dates

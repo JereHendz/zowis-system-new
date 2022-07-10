@@ -119,7 +119,8 @@ class Products extends ResourceController
                 "idThirdLevelLocation" => $productDetail['idThirdLevelLocation'],
                 "whoCreated" => $whoCreated,
                 "idProduct" => $idProduct,
-                "createDate" => date('Y-m-d H:i:s')
+                "createDate" => date('Y-m-d H:i:s'),
+                "stock" => intval($productDetail['quantity']),
             );
 
             if (!$idProductDetail = $productDetailModel->insert($arrayProductDetail)) {
@@ -127,8 +128,8 @@ class Products extends ResourceController
             }
             $updateProduct = array(
                 "stockProduct" => $productDetail['quantity'],
-                "unitSalePriceAvg"=> $productDetail['unitSalePrice'],
-                "unitPurchasePriceAvg"=> $productDetail['unitPurchasePrice'],
+                "unitSalePriceAvg" => $productDetail['unitSalePrice'],
+                "unitPurchasePriceAvg" => $productDetail['unitPurchasePrice'],
             );
             if (!$productsModel->update($idProduct, $updateProduct)) {
                 return $this->failValidationErrors($productsModel->errors());
@@ -137,12 +138,12 @@ class Products extends ResourceController
 
         $uploadPath = "../Uploads/";
         $Fecha = date("YmdHis");
-        $contImg=0;
+        $contImg = 0;
         foreach ($files as $img) {
 
             if ($img->isValid() && !$img->hasMoved()) {
                 $realName = $img->getName();
-                $nameCloudinary = explode('.', $realName)[0] . $Fecha.$contImg;
+                $nameCloudinary = explode('.', $realName)[0] . $Fecha . $contImg;
                 $nameCloudinary = str_replace(" ", "", $nameCloudinary);
                 $pathName = $img->getRealPath();
                 $uploaded = (new UploadApi())->upload($pathName, [
@@ -156,7 +157,7 @@ class Products extends ResourceController
                     "whoCreated" => $whoCreated,
                     "idProduct" => $idProduct,
                     "createDate" => date('Y-m-d H:i:s'),
-                    "priority"=>$contImg,
+                    "priority" => $contImg,
                     "publicIdCloudinary" => 'zowis/' . $nameCloudinary
                 );
 
@@ -341,16 +342,16 @@ class Products extends ResourceController
 
 
         $contImg = count($infoImg);
-       
+
         $files = $this->request->getFiles();
-       
+
         // $responseDelete validate if the result is ok
         $Fecha = date("YmdHis");
         foreach ($files as $img) {
             $contImg++;
             if ($img->isValid() && !$img->hasMoved()) {
                 $realName = $img->getName();
-                $nameCloudinary = explode('.', $realName)[0] . $Fecha.$contImg;
+                $nameCloudinary = explode('.', $realName)[0] . $Fecha . $contImg;
                 $nameCloudinary = str_replace(" ", "", $nameCloudinary);
                 $pathName = $img->getRealPath();
                 $uploaded = (new UploadApi())->upload($pathName, [
@@ -362,7 +363,7 @@ class Products extends ResourceController
                     "whoCreated" => $whoCreated,
                     "idProduct" => $idProduct,
                     "createDate" => date('Y-m-d H:i:s'),
-                    "priority"=>$contImg,
+                    "priority" => $contImg,
                     "publicIdCloudinary" => 'zowis/' . $nameCloudinary
                 );
 
@@ -375,17 +376,60 @@ class Products extends ResourceController
         }
 
         return $this->respondCreated(['message' => 'Create Successfully', 'data' => $imagesModel->getImagesByProduct($idProduct)]);
+    }
 
+    public function createStockProduct()
+    {
+
+        $productModel = new ProducsModel();
+        $productDetailModel = new ProductDetailModel();
+
+        // Get the form of add product to stock 
+        $formAddStock = $this->request->getJSON(true);
+
+        $formAddStock['stock'] = $formAddStock['quantity'];
+        $formAddStock['createDate'] = date('Y-m-d H:i:s');
+
+        $infoAvgPrice = $productModel->getAvgCost($formAddStock['idProduct']);
+
+        if (count($infoAvgPrice) > 0) {
+            # code...
+            $inventoryValueOld = $infoAvgPrice[0]['inventoryValue'];
+            $stockProductOld = $infoAvgPrice[0]['stockProduct'];
+
+            $inventoryValueNew = $formAddStock['quantity'] * $formAddStock['unitPurchasePrice'];
+            $stockProductNew = $formAddStock['quantity'];
+            $stockNew=$stockProductOld + $stockProductNew;
+
+            $avgCost = ($inventoryValueOld + $inventoryValueNew) / ($stockNew);
+
+            $avgCost = number_format($avgCost, 2, '.', '');
+
+            $arrayProduct = array(
+                "unitSalePriceAvg" => $avgCost,
+                "stockProduct"=>$stockNew,
+                "updateDate" => date('Y-m-d H:i:s')
+            );
+
+            // Validating  information and save record
+            if (!$id = $productDetailModel->insert($formAddStock)) {
+                return $this->failValidationErrors($productDetailModel->errors());
+            }
+
+            if ($idUpt = !$productModel->update($formAddStock['idProduct'], $arrayProduct)) {
+                return $this->failValidationErrors($productModel->errors());
+            }
+        }
+        return $this->respondCreated(['message' => 'Create Successfully', 'data' =>  $infoAvgPrice]);
     }
 
     public function test()
     {
 
-        $idPublic = "zowis/WhatsAppImage2022-06-25at1120220630205044";
-        // $nameCloudinary = str_replace(" ", "", $idPublic); 
-        $responseDelete = (new UploadApi())->destroy($idPublic);
+        $productModel = new ProducsModel();
+        $pr = $productModel->getProductWithImage();
         // echo $responseDelete;
-        // echo $nameCloudinary;
+        var_dump($pr);
         // echo "jere";
 
     }
