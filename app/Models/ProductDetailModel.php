@@ -17,7 +17,6 @@ class ProductDetailModel extends Model
     protected $allowedFields    = [
         'descriptionDetail',
         'unitPurchasePrice',
-        'unitSalePrice',
         'quantity',
         'whodidit',
         'whoCreated',

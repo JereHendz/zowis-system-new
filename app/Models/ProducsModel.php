@@ -71,7 +71,7 @@ class ProducsModel extends Model
     public function getProductWithImage()
     {
         $this->select('products.id, products.productName, products.description, images_products.link,
-         "" barcode, product_details.unitSalePrice, products.productDiscount',false);
+         "" barcode, products.unitSalePriceAvg, products.productDiscount',false);
         $this->table("products");
         $this->join("product_details","product_details.idProduct=products.id");
         $this->join("images_products","images_products.idProduct=products.id");
@@ -88,6 +88,16 @@ class ProducsModel extends Model
               where product_details.idProduct=$idProduct";
         $query = $this->db->query($sql); 
         return ($query->getNumRows() > 0) ? $query->getResultArray():array();
+    }
+
+    public function getProductsAndBrand()
+    {
+        $this->select('product_details.idProduct, product_details.idBrand, brands.name');
+        $this->from("product_details");
+        $this->join("brands","brands.id=product_details.idBrand");
+        $this->groupBy("product_details.idProduct, product_details.idBrand");
+        $query = $this->get();
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
     }
 
     // public function saveDetailProduct($data)

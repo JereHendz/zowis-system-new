@@ -72,7 +72,6 @@ class Products extends ResourceController
         $productDetailModel = new ProductDetailModel();
 
 
-
         $files = $this->request->getFiles();
 
         $informationProduct = json_decode($this->request->getPost('informationProduct'), true);
@@ -111,7 +110,6 @@ class Products extends ResourceController
                 "idBrand" => intval($productDetail['idBrand']),
                 "quantity" => intval($productDetail['quantity']),
                 "unitPurchasePrice" => floatval($productDetail['unitPurchasePrice']),
-                "unitSalePrice" => floatval($productDetail['unitSalePrice']),
                 "idBranchOffice" => intval($productDetail['idBranchOffice']),
                 "idWineries" => $productDetail['idWineries'],
                 "idFirstLevelLocation" => $productDetail['idFirstLevelLocation'],
@@ -181,8 +179,18 @@ class Products extends ResourceController
     {
         $productModel = new ProducsModel();
         $pr = $productModel->getProductWithImage();
+        $productBrand=$productModel->getProductsAndBrand();
         $products = array();
         foreach ($pr as $key => $value) {
+            $idPro=$value['id'];
+            $brands = array_filter($productBrand, function ($k) use ($idPro) {
+                return $k['idProduct'] == $idPro;
+            });
+            $arrayBrandsName=array();
+            if (count($brands)>0) {
+                $arrayBrandsName=array_column($brands,"name");
+            }
+            
             $products[] = array(
                 "id" => $value['id'],
                 "img" => !empty($value['link']) ? $value['link'] : "ecommerce/01.jpg",
@@ -192,7 +200,7 @@ class Products extends ResourceController
                 "discription" => $value['description'],
                 "discountPrice" => $value['productDiscount'],
                 "status" => "none",
-                "price" => floatval($value['unitSalePrice']),
+                "price" => floatval($value['unitSalePriceAvg']),
                 "stock" => "In stock",
                 "review" => "(250 review)",
                 "category" => "Man",
@@ -205,11 +213,12 @@ class Products extends ResourceController
                     "L",
                     "XL"
                 ),
-                "tags" => array(
-                    "Diesel",
-                    "Hudson",
-                    "Lee"
-                ),
+                // "tags" => array(
+                //     "Diesel",
+                //     "Hudson",
+                //     "Lee"
+                // ),
+                "tags"=>$arrayBrandsName,
                 "variants" => array(
                     "color" => array(
                         "color" => "White",
@@ -431,6 +440,27 @@ class Products extends ResourceController
         // echo $responseDelete;
         var_dump($pr);
         // echo "jere";
+    }
 
+    public function update($id = null){
+        $productsModel = new ProducsModel();
+        $form=$this->request->getJSON(true);
+        $form['updateDate']=date('Y-m-d H:i:s');
+        if(empty($form)){
+            return $this->failValidationErrors('Nothing to update');
+        }
+
+        if(!$productsModel->find($id)){
+            return $this->failNotFound();
+        }
+
+        if(!$productsModel->update($id, $form)){
+            return $this->failValidationErrors($productsModel->errors());
+        }
+
+        return $this->respondUpdated([
+            'message'=>'Updated successfully',
+            'data'=>true,
+        ]);
     }
 }
