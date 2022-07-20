@@ -17,7 +17,6 @@ class ProductDetailModel extends Model
     protected $allowedFields    = [
         'descriptionDetail',
         'unitPurchasePrice',
-        'unitSalePrice',
         'quantity',
         'whodidit',
         'whoCreated',
@@ -31,8 +30,7 @@ class ProductDetailModel extends Model
         'idSecondLevelLocation',
         'idThirdLevelLocation',
         'idProvider',
-        'stock'
-
+        'stock',
     ];
 
     // Dates

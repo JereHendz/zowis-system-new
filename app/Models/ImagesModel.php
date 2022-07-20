@@ -14,7 +14,9 @@ class ImagesModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
+    protected $allowedFields    = 
+    [
+        'id',
         'link',
         'status',
         'description',
@@ -22,7 +24,10 @@ class ImagesModel extends Model
         'whodidit',
         'createDate',
         'updateDate',
-        'idProduct'
+        'idProduct',
+        'priority',
+        'visibleCustomer',
+        'publicIdCloudinary'
     ];
 
     // Dates
@@ -48,4 +53,29 @@ class ImagesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getImagesByProduct($idProduct)
+    {
+        $this->table("images_products");
+        $this->select('images_products.*, products.productName, processStates.name visibleCustomerName',false);
+        $this->join("products","images_products.idProduct=products.id");
+        $this->join("processStates","images_products.visibleCustomer=processStates.id");
+
+        $this->where("products.id =", $idProduct);
+        $this->orderBy("images_products.priority", "asc");
+        $query = $this->get();
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
+    }
+
+    public function getImgOrderedByDate($idProduct, $id)
+    {
+        $this->select('*');
+        $this->table("images_products");
+        $this->where("id <>", $id);
+        $this->where("idProduct =", $idProduct);
+        $this->orderBy("priority", "asc");
+        $this->orderBy("updateDate", "desc");
+        $query = $this->get();
+        return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
+    }
 }

@@ -47,12 +47,15 @@ $routes->group('api', function($routes){
     $routes->add('searchProduct/(:any)', 'Products::searchProduct/$1');
     $routes->add('getProductImages', 'Products::getAllProductsWithImages');
     $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
-    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');
     $routes->resource('sales'); //api/Sale
     $routes->resource('saleDetail'); //api/SaleDetail
     $routes->add('showSaleDetail/(:any)', 'SaleDetail::showSaleDetail/$1');
     $routes->resource('clients'); //api/clients
-    
+    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');  
+    $routes->add('imagesById/(:any)', 'Products::getImagesByProduct/$1');  
+    $routes->add('uptImage', 'Products::updateImage');    
+    $routes->add('createImages', 'Products::createImagesByProduct');    
+    $routes->add('addStockProduct', 'Products::createStockProduct');
 
     // $routes->post('statusR', 'ProcessState::show/$1');
 
