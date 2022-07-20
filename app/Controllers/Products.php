@@ -415,7 +415,7 @@ class Products extends ResourceController
             $avgCost = number_format($avgCost, 2, '.', '');
 
             $arrayProduct = array(
-                "unitSalePriceAvg" => $avgCost,
+                "unitPurchasePriceAvg" => $avgCost,
                 "stockProduct"=>$stockNew,
                 "updateDate" => date('Y-m-d H:i:s')
             );

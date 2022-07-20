@@ -75,6 +75,8 @@ class ProducsModel extends Model
         $this->table("products");
         $this->join("product_details","product_details.idProduct=products.id");
         $this->join("images_products","images_products.idProduct=products.id");
+        $this->where("images_products.priority",1);
+        $this->where("images_products.visibleCustomer",6);
         $this->groupBy("products.id");
         $query = $this->get();
         return ($query->getNumRows() > 0) ? $query->getResultArray() : array();

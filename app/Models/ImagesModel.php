@@ -56,12 +56,13 @@ class ImagesModel extends Model
 
     public function getImagesByProduct($idProduct)
     {
-        $this->select('images_products.*, products.productName',false);
         $this->table("images_products");
+        $this->select('images_products.*, products.productName, processStates.name visibleCustomerName',false);
         $this->join("products","images_products.idProduct=products.id");
+        $this->join("processStates","images_products.visibleCustomer=processStates.id");
+
         $this->where("products.id =", $idProduct);
         $this->orderBy("images_products.priority", "asc");
-
         $query = $this->get();
         return ($query->getNumRows() > 0) ? $query->getResultArray() : array();
     }
