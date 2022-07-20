@@ -4,36 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductDetailModel extends Model
+class SaleDetailModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'product_details';
+    protected $table            = 'sale_detail';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'descriptionDetail',
-        'unitPurchasePrice',
-        'unitSalePrice',
-        'quantity',
-        'whodidit',
-        'whoCreated',
-        'createDate',
-        'updateDate',
-        'idProduct',
-        'idBrand',
-        'idBranchOffice',
-        'idWineries',
-        'idFirstLevelLocation',
-        'idSecondLevelLocation',
-        'idThirdLevelLocation',
-        'idProvider',
-        'stock'
-
-    ];
+    protected $allowedFields    = ['idSale','idProduct','quantity','salePrice','discount','total','whodidit','whoCreated','createDate','updateDate'];
 
     // Dates
     protected $useTimestamps = false;
@@ -59,13 +40,13 @@ class ProductDetailModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getProductDetailByIdProduct($idProduct)
+    public function showSaleDetail($idVenta)
     {
-        $sql = "SELECT *
-                FROM product_details
-                WHERE idProduct = '$idProduct' AND stock > 0
-                ORDER BY id LIMIT 1";
-        $query = $this->db->query($sql);     
+        $sql = "SELECT sd.*, p.*, ip.link
+                FROM sale_detail sd LEFT JOIN products p ON sd.idProduct = p.id
+                LEFT JOIN (SELECT * FROM images_products WHERE priority = 1) AS ip ON sd.idProduct = ip.idProduct
+                WHERE idSale = '$idVenta'";
+        $query = $this->db->query($sql);
         return ($query->getNumRows()>0) ? $query->getResultArray():array();
     }
 }

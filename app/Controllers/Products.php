@@ -42,6 +42,17 @@ class Products extends ResourceController
         return $this->respond($data);
     }
 
+    public function show($id = null){
+        //Get a specify sub_category
+        $productsModel = new ProducsModel();
+
+        $data = array(
+            'product' => $productsModel->find($id),
+        );
+
+        return $this->respond($data);
+    }
+
     public function getInformationToCreateProduct()
     {
         $category = new CategoriesModel();
@@ -266,5 +277,15 @@ class Products extends ResourceController
         //         }
         //     ]
         // },
+    }
+
+    //método para buscar un poroducto por barcode o nombre, de una sucursal especifica
+    public function searchProduct($busqueda = null, $tipo_busqueda = null, $idBranchOffice = null){
+        $productModel = new ProducsModel();
+        $data = array(
+            'product' => $productModel->searchProduct($busqueda, $tipo_busqueda, $idBranchOffice)
+        );
+
+        return $this->respond($data);
     }
 }

@@ -44,15 +44,17 @@ $routes->group('api', function($routes){
     $routes->add('providersComplete', 'Providers::providersComplete');
     $routes->resource('brands'); //api/Brands
     $routes->resource('products'); //api/Products
+    $routes->add('searchProduct/(:any)', 'Products::searchProduct/$1');
     $routes->add('getProductImages', 'Products::getAllProductsWithImages');
     $routes->add('infoFormProduct', 'Products::getInformationToCreateProduct');
-    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1'); 
-    $routes->resource('sales'); //api/Providers
-    $routes->resource('clients'); //api/Providers
+    $routes->add('subCateByIdCate/(:any)', 'SubCategories::getSubCategoriesByIdCategory/$1');
+    $routes->resource('sales'); //api/Sale
+    $routes->resource('saleDetail'); //api/SaleDetail
+    $routes->add('showSaleDetail/(:any)', 'SaleDetail::showSaleDetail/$1');
+    $routes->resource('clients'); //api/clients
     
 
     // $routes->post('statusR', 'ProcessState::show/$1');
-
 
 
     // $routes->get('login/(:any)', 'Users::login/$1'); //api/Users/login

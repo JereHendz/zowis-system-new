@@ -81,4 +81,20 @@ class ProducsModel extends Model
     //     $this->save('product_details',$data);
     //     return ($this->affected_rows() != 1) ? false : true;
     // }
+    public function searchProduct($busqueda, $tipo_busqueda, $idBranchOffice)
+    {
+        if($tipo_busqueda == 1){
+            $where = " p.barcode = '$busqueda' ";
+        }else{
+            $where = " p.productName LIKE '%$busqueda%' ";
+        }
+        $sql = "SELECT SUM(pd.stock) AS stock, ip.link, p.*
+                FROM products p LEFT JOIN (SELECT * FROM images_products WHERE priority = 1) AS ip ON p.id = ip.idProduct
+                LEFT JOIN product_details pd ON p.id = pd.idProduct
+                WHERE $where AND pd.idBranchOffice = '$idBranchOffice'
+                GROUP BY pd.idProduct
+                LIMIT 10";
+        $query = $this->db->query($sql);     
+        return ($query->getNumRows()>0) ? $query->getResultArray():array();
+    }
 }
